@@ -149,3 +149,4 @@
 <!-- Footer -->';
 
 ?>
+<!-- fixed-bottom is a class u could use -->

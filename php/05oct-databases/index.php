@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<title>PHP Basics</title>
+		<title>PHP DATABASES YO</title>
 	</head>
 	<body>
 
@@ -14,37 +14,12 @@
       <?php include 'nav.php';?>
     </div>
 
-    <div class="container">
-      <?php include 'first-exercise.php';?>
-      <?php include 'arrays.php';?>
-
-			<h1>object..!!</h1>
-			<?php
-			class Object {
-				public $name;
-				public $age;
-				public function __construct($name, $age) {
-					$this->name = $name;
-					$this->age = $age;
-				}
-				public function message() {
-					return 'i am ' . $this->name . ' and i am ' . $this->age . ' years old !!!';
-				}
-			}
-
-			$myself = new Object('mo', '20');
-			echo $myself -> message();
-			echo '<br>';
-			?>
-
-			<br>
-			<?php include 'functions.php';?>
-
+    <div class="container mt-5">
+      <h1>Databases in PHP</h1>
+      <?php include 'database_connection.php';?>
     </div>
 
     <div class="col-12">
-      <?php include 'footer.php';
-      echo $footervar;?>
     </div>
 
 	</body>

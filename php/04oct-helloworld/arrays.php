@@ -53,8 +53,24 @@ foreach($people as $key => $person) { ?>
 <h1>looplooploops</h1>
 <h6>NORMAL LOOP not FOREACH</h6>
 <?php
-  for ($i = 0; $i < 10; $i ++){
+  for($i = 0; $i < 10; $i ++) {
     $number = 10 * $i;
     echo 'new number alert! its now at ' . $number . '<br>';
   }
+?>
+
+<h3>loops again.</h3>
+<h6>rendering html in the middle of the loop! >:0</h6>
+
+<?php
+
+for($i = 1; $i <= 10; $i ++) {
+  // echo $i . ' oooooohoohoo <br>';
+  ?>
+  <!-- html goes here :P -->
+  <p>the value of i! what could it be! it is: <?php echo '<b style="color:red;">' . $i . '</b>'; ?></p>
+  <?php
+}
+// comment out only inbetween the php tags otherwise its gonna freak out at u LOL
+
 ?>
