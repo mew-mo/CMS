@@ -4,7 +4,10 @@ $hostname = 'localhost';
 $username = 'root';
 $password = 'root';
 
-$database = 'new_db';
+// $database = 'new_db';
+// new-db is the one with the names and salary
+$database = 'dudes';
+// dudes has eyecolor
 // go in ur db and go to SQL -> type CREATE DATABASE "hdsjdsnamedsjkdsf"-- shown after the con error in here!
 // mysql is all caps
 
@@ -84,27 +87,16 @@ $db = mysqli_connect($hostname, $username, $password, $database) or die(mysqli_e
 // =========================================
 
 // show all users is a QUERY
-$show_all_users = "SELECT id, name, salary FROM people";
-$result = $db->query($show_all_users);
-
-if ($result->num_rows > 0) {
-  // Output data from each row
-  while ($row = $result->fetch_assoc()) {
-    echo '<div>'.$row["name"].'</div>';
-  }
-} else {
-  echo 'no results yo??';
-}
-
-// $show_all_users_query = "SELECT id, name, salary FROM people";
-//   $result = $db->query($show_all_users_query);
-//   if ($result->num_rows > 0) {
-//     // Output data from each row
-//     while($row = $result->fetch_assoc()) {
-//       echo '<div>' . $row["name"] . '</div>';
-//     }
-//   }else{
-//     echo "0 results";
+// $show_all_users = "SELECT id, name, salary FROM people";
+// $result = $db->query($show_all_users);
+//
+// if ($result->num_rows > 0) {
+//   // Output data from each row
+//   while ($row = $result->fetch_assoc()) {
+//     echo '<div> Name: '.$row["name"]. ' Salary: ' . $row["salary"] . '</div>';
 //   }
+// } else {
+//   echo 'no results yo??';
+// }
 
 ?>

@@ -75,8 +75,10 @@ if ($result->num_rows > 0) {
   // Output data from each row
   while ($row = $result->fetch_assoc()) {
     ?>
-    <span class="material-icons inline float-left mr-3"><?php echo $row["icon"]?></span>
-    <h6 class="inline float-left mt-1"><?php echo $row["linkName"]?></h6> <br> <br>
+    <span class="material-icons inline float-left mr-3" style=
+    "cursor:pointer;"><?php echo $row["icon"]?></span>
+    <h6 class="inline float-left mt-1" style=
+    "cursor:pointer;"><?php echo $row["linkName"]?></h6> <br> <br>
     <?php
   }
 } else {

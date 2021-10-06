@@ -7,19 +7,20 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<title>PHP instagram time</title>
+		<title>PHP SHOP TIME</title>
 	</head>
 	<body>
 
+    <div class="nav col-12">
+      <?php include 'nav.php'?>
+    </div>
+
     <div class="container mt-5">
       <div class="row">
-        <div class="col-2">
-          <?php include 'sidebar.php';?>
-        </div>
-        <div class="col-10">
-          <h1>ohhohooho</h1>
+        <div class="col-12">
+          <h1>THE BEST SHOP YOU'VE EVER SEEN.</h1>
           <div class="row">
-            <?php include 'photo_body.php';?>
+            <?php include 'products.php';?>
           </div>
         </div>
       </div>
