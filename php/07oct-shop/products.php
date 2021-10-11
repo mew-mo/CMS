@@ -68,7 +68,7 @@ if ($result->num_rows > 0) {
           <p class="inline float-right text-secondary">$<?php echo $row["price"]?></p>
           <p class="card-text float-left inline"><?php echo $row["description"]?></p>
         </div>
-        <a href="index.php?delete=true&id=<?php echo $row["id"]?>" type="button" name="delete" id="<?php echo $row["id"]?>" style="margin-left:75%; margin-top:-20px; padding: 10px;"">Delete</a>
+        <a href="index.php?delete=true&id=<?php echo $row["id"]?>" type="button" name="delete" id="<?php echo $row["id"]?>" style="margin-left:75%; margin-top:-20px; padding: 10px;">Delete</a>
       </div>
     </div>
     <?php

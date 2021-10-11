@@ -1,0 +1,31 @@
+/*
+
+Theme Name: MO REAL Custom Theme
+
+Theme URI: http://website.com/theme
+
+Author: Mo
+
+Author URI: http://website.com/theme
+
+Description: My first custom theme :D
+
+Version: 0.0.1
+
+License: GNU General Public License v2 or later
+
+Tags: cool, new
+
+*/
+
+/* wordpress reads the styles in the root directory */
+/* style.css has to be the first file you make, as it is what makes wordpress read your theme */
+/* preview image HAS TO BE A PNG and HAS TO BE CALLED screenshot.png. that's what wordpress looks for. */
+
+body {
+color: #c994df;
+}
+
+.bg-pastel {
+  background-color: #392f3d !important;
+}
