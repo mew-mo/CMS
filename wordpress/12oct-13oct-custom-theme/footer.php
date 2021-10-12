@@ -1,6 +1,6 @@
 <?php wp_footer(); ?>
 <br><br>
-<footer class="bg-pastel text-center text-white">
+<footer class="bg-dark text-center text-white">
   <!-- Grid container -->
   <div class="container p-4">
 
@@ -47,9 +47,12 @@
       <div class="row">
         <!--Grid column-->
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Links</h5>
+          <h5 class="text-uppercase">Features</h5>
+          <?php //$args = ['title_li', 'null']; ?>
 
-          <ul class="list-unstyled mb-0">
+          <?php wp_list_pages(); ?>
+
+          <!-- <ul class="list-unstyled mb-0">
             <li>
               <a href="#!" class="text-white">Link 1</a>
             </li>
@@ -62,7 +65,7 @@
             <li>
               <a href="#!" class="text-white">Link 4</a>
             </li>
-          </ul>
+          </ul> -->
         </div>
         <!--Grid column-->
 
@@ -145,5 +148,4 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

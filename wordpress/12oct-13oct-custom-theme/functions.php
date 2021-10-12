@@ -4,6 +4,10 @@
 
 <?php
 
+// turning on the thumbnails--
+// turn on theme support
+add_theme_support('post-thumbnails');
+
 function import_stylesheet() {
   wp_enqueue_style('custom-style', get_stylesheet_uri());
   // the arguments we are using are string $handle, which just names it
@@ -23,5 +27,40 @@ add_action('wp_enqueue_scripts', 'import_stylesheet');
 
 register_nav_menus(['primary' => 'mo! primary menu']);
 // telling it that it will exist in the primary slot. mos primary menu IS the primary slot
+
+// customise the excerpt length (filter hook)
+function new_excerpt_length() {
+  return 20;
+}
+// use a filter hook to modify wordpress function at runtime
+add_filter('excerpt_length', 'new_excerpt_length');
+// 1st arg: what we want to change
+// 2nd argument: OUR function as a callback (the new change)
+
+// creating custom post type!!
+function create_fruit_posttype() {
+  // set up arguments
+  $args = array(
+    // first arg: the label, which is an array itself
+    'labels' => array(
+      // name of the post type
+      'name' => 'Fruit',
+      'singular_name' => 'Fruit' //for words that could be plurals. ex name = cats, singular_name = cat.
+    ),
+    'public' => true,
+    // public on dashboard so anyone can use it
+    'menu_icon' => 'dashicons-carrot',
+    // https://developer.wordpress.org/resource/dashicons/#location-alt
+    // the icon that'll display on the dashboard menu
+    'supports' => array('title', 'editor', 'thumbnail')
+    // tells wordpress whats available in the post (these ones r basic but yes)
+   );
+   // Within the createfruit function, we need to register the posttype
+   register_post_type('fruit', $args);
+   // must use lowercase registering bc this is the dataname of the posttype
+}
+// gonna create this function with an action hook
+
+add_action('init', 'create_fruit_posttype');
 
 ?>

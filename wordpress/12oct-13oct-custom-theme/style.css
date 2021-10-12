@@ -22,10 +22,22 @@ Tags: cool, new
 /* style.css has to be the first file you make, as it is what makes wordpress read your theme */
 /* preview image HAS TO BE A PNG and HAS TO BE CALLED screenshot.png. that's what wordpress looks for. */
 
-body {
-color: #c994df;
+.pastel-purp {
+  color: #c994df;
+}
+
+.bg-dark {
+  background-color: #392f3d !important;
 }
 
 .bg-pastel {
-  background-color: #392f3d !important;
+  background-color: #c994df !important;
+}
+
+.contact-body h3 {
+  display: inline;
+}
+
+.author-tag {
+  font-style: italic;
 }

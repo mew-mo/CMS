@@ -22,7 +22,14 @@
                   <a href="<?php the_permalink();?>">
                   <?php the_title(); ?></h5>
                   </a>
-                <p class="card-text"><?php the_content();?></p>
+                  <p class="text-secondary">Posted: <?php the_date('F j, Y');?> <?php the_time();?></p>
+                  <!-- f = full name of month -->
+                  <!-- j = number of the month -->
+                  <!-- y = year -->
+                <p class="card-text"><?php the_excerpt();?></p>
+                <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
+                <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
+                <a href="<?php the_permalink();?>" style="color:white;"><button type="button" class="btn btn-primary bg-pastel">Read more</button></a>
               </div>
             </div>
           </div>
