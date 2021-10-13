@@ -1,8 +1,7 @@
-<!-- basically the backend of your theme is in this file -->
-
-<!-- functions that render different post files, filter hooks and action hooks. etc. -->
-
 <?php
+// basically the backend of your theme is in this file
+//
+// functions that render different post files, filter hooks and action hooks. etc.
 
 // turning on the thumbnails--
 // turn on theme support
@@ -52,8 +51,11 @@ function create_fruit_posttype() {
     'menu_icon' => 'dashicons-carrot',
     // https://developer.wordpress.org/resource/dashicons/#location-alt
     // the icon that'll display on the dashboard menu
-    'supports' => array('title', 'editor', 'thumbnail')
+    'supports' => array('title', 'editor', 'thumbnail'),
     // tells wordpress whats available in the post (these ones r basic but yes)
+    'menu_position' => 5
+    // changes where it is located on the menu tab in the wordpress dashboard
+    // https://developer.wordpress.org/reference/functions/register_post_type/#menu_position
    );
    // Within the createfruit function, we need to register the posttype
    register_post_type('fruit', $args);
@@ -62,5 +64,41 @@ function create_fruit_posttype() {
 // gonna create this function with an action hook
 
 add_action('init', 'create_fruit_posttype');
+
+// creating custom post type!!
+function create_sport_posttype() {
+  // set up arguments
+  $args = array(
+    'labels' => array(
+      'name' => 'Sports',
+      'singular_name' => 'Sport'
+    ),
+    'public' => true,
+    'menu_icon' => 'dashicons-universal-access',
+    'supports' => array('title', 'editor', 'thumbnail'),
+    'menu_position' => 5
+   );
+   register_post_type('sports', $args);
+}
+
+add_action('init', 'create_sport_posttype');
+
+function create_photographs_posttype() {
+  // set up arguments
+  $args = array(
+    'labels' => array(
+      'name' => 'Photographs',
+      'singular_name' => 'Photograph'
+    ),
+    'public' => true,
+    'menu_icon' => 'dashicons-camera',
+    'supports' => array('title', 'editor', 'thumbnail'),
+    'menu_position' => 5
+   );
+   register_post_type('photographs', $args);
+}
+
+add_action('init', 'create_photographs_posttype');
+
 
 ?>

@@ -1,12 +1,14 @@
 
   <?php get_header(); ?>
+
+  <!-- the index is NOT the front page, but IS what wordpress will default to if it cant find a specified page type or template. the front page IS front-page.php. -->
+
   <!-- wordpress NEEDS to have a header and a footer or else it will be so upset with you -->
   <!-- finds our header.php and runs it across all pages (cool) -->
   <!-- wordpress will always use a default file to render the template unless you have a custom files specifically. your custom stuff will always override their defaults -->
 
     <div class="container mt-5">
       <h1>ALL POSTS</h1>
-
       <div class="row">
 
         <?php
@@ -22,7 +24,13 @@
                   <a href="<?php the_permalink();?>">
                   <?php the_title(); ?></h5>
                   </a>
-                  <p class="text-secondary">Posted: <?php the_date('F j, Y');?> <?php the_time();?></p>
+                  <p class="text-secondary">Posted:
+                   <?php the_date('F j, Y');?>
+                   <?php the_time();?>
+                  </p>
+                  <!-- <p class="text-secondary">Posted:  -->
+                    <?php //echo get_the_date('F j, Y');?> <?php //the_time();?>
+                  <!-- </p> -->
                   <!-- f = full name of month -->
                   <!-- j = number of the month -->
                   <!-- y = year -->
@@ -37,10 +45,8 @@
             else : echo '<p> There are no posts,, </p>';
           endif
           ?>
-
       </div>
       <!-- end row -->
-
 
       <?php
       // if ( have_posts() ) {

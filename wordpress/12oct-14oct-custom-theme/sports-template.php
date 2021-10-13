@@ -1,10 +1,8 @@
-<!-- template for the about us page ^-^ wooo -->
-
 <?php
 
 /*
 
-Template Name: momo fruit fruit template!
+Template Name: momo dont like sport template!
 
 */
 
@@ -14,7 +12,7 @@ Template Name: momo fruit fruit template!
 
 query_posts(
   array(
-    'post_type' => 'fruit'
+    'post_type' => 'sports'
   )
 );
 // checks what the posts are. make sure they MATCH
@@ -22,12 +20,26 @@ query_posts(
 
 <?php
 
+get_header(); ?>
+
+<div class="container mt-5">
+  <h1><?php the_title(); ?></h1>
+  <h3>i am not a sport fan; welcome to SPORTS</h3>
+  <?php the_content(); ?>
+
+  <div class="row">
+
+
+<?php
 if ( have_posts() ) :
 
   while (have_posts() ) : the_post(); ?>
   <!-- this is where it loops over each post -->
   <div class="col-4">
     <div class="card" style="width: 18rem;">
+      <?php the_post_thumbnail('medium_large', ['class' => 'card-img-top']); ?>
+      <!-- 1st arg is img size -->
+      <!-- 2nd arg is an array of attributes -->
       <div class="card-body">
         <h5 class="card-title">
           <a href="<?php the_permalink();?>">
@@ -49,13 +61,12 @@ if ( have_posts() ) :
   endif
   ?>
 
-  <?php get_header(); ?>
+  </div>
+  <!-- end row -->
 
-    <div class="container mt-5">
-      <h1><?php the_title(); ?></h1>
-      <?php the_content(); ?>
+</div>
+<!-- end container -->
 
-    </div>
-    <!-- end container -->
+
   <?php get_footer(); ?>
 </html>
