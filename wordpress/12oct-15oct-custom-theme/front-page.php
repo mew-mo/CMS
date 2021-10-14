@@ -24,7 +24,10 @@
                   <a href="<?php the_permalink();?>">
                   <?php the_title(); ?></h5>
                   </a>
-                  <p class="text-secondary">Posted: <?php the_date('F j, Y');?> <?php the_time();?></p>
+                  <!-- <p class="text-secondary">Posted: <?php //the_date('F j, Y');?> <?php //the_time();?></p> -->
+                  <!-- the_date() will only show a particular date oNCE, so say if you post multiple times on oct 12, it will only print the date of october 12 on One item -->
+                  <p class="text-secondary">Posted: <?php echo get_the_date('F j, Y');?> <?php the_time();?></p>
+
                   <!-- f = full name of month -->
                   <!-- j = number of the month -->
                   <!-- y = year -->
@@ -75,13 +78,49 @@
                 <a href="<?php the_permalink();?>">
                 <?php the_title(); ?></h5>
                 </a>
-                <p class="text-secondary">Posted: <?php the_date('F j, Y');?> <?php the_time();?></p>
+                <!-- <p class="text-secondary">Posted: <?php //the_date('F j, Y');?> <?php //the_time();?></p> -->
+                <p class="text-secondary">Posted: <?php echo get_the_date('F j, Y');?> <?php the_time();?></p>
                 <!-- f = full name of month -->
                 <!-- j = number of the month -->
                 <!-- y = year -->
               <p class="card-text"><?php the_excerpt();?></p>
               <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
               <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
+
+              <p><?php
+                $review = get_post_meta(get_the_ID(), 'review_input', true);
+                if ($review) {
+                  ?><b>REVIEW:</b> <?php
+                  echo $review;
+                }
+              ?></p>
+
+              <!-- trying todo the LOOP??? -->
+              <p class="star-rating">
+                <?php
+                  $stars = get_post_meta(get_the_ID(), 'radio_rating', true);
+                  // stars is the number that you rated it
+                  $star_num = 5;
+                  // star num is the total number of stars we want to show regardless of your rating :)
+                  for ($i=0; $i < $star_num ; $i++) {
+                    if ($i < $stars) {
+                      ?>
+                      <span class="material-icons">
+                      star
+                      </span>
+                      <?php
+                    } else {
+                      ?>
+                      <span class="material-icons">
+                      star_outline
+                      </span>
+                      <?php
+                    }
+                  }
+                ?>
+              </p>
+              <!-- bro i feel so smart right now even though this is so basic LOOOOL -->
+
               <a href="<?php the_permalink();?>" style="color:white;"><button type="button" class="btn btn-primary bg-pastel">Read more</button></a>
             </div>
           </div>
@@ -165,7 +204,8 @@
             <div class="carousel-item active">
               <?php the_post_thumbnail('large',
               ['class' => 'd-block',
-              'class' => 'w-100']); ?>
+              'class' => 'w-100',
+              'class' => 'caro-img']); ?>
               <div class="carousel-caption d-none d-md-block" >
                 <h5><?php the_title();?></h5>
                 <p><?php the_content();?></p>
@@ -179,7 +219,8 @@
             <div class="carousel-item">
               <?php the_post_thumbnail('large',
               ['class' => 'd-block',
-              'class' => 'w-100']); ?>
+              'class' => 'w-100',
+              'class' => 'caro-img']); ?>
               <div class="carousel-caption d-none d-md-block">
                 <h5><?php the_title();?></h5>
                 <p><?php the_content();?></p>

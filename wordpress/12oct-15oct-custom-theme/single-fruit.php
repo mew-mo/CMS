@@ -17,8 +17,15 @@
             <div class="card" style="width: 100%;">
               <div class="card-body">
                 <h5 class="card-title"><?php the_title(); ?></h5>
+                <p class="text-secondary"><?php
+                  $fruit_blurb = get_post_meta(get_the_ID(), 'blurb_input', true);
+                  echo $fruit_blurb;
+                 ?></p>
                 <p class="card-text"><?php the_content();?></p>
-                <a href="<?php wp_redirect('fruit-template.php');?>" style="color:white;"><button type="button" class="btn btn-primary bg-pastel">Back to all fruit</button></a>
+                <a href="<?php echo get_page_link(get_page_by_path('actual-fruit-not-clickbait'));?>" style="color:white;">
+                  <!-- get the page slug ^o^ to get page by path -->
+                  <button type="button" class="btn btn-primary bg-pastel">Back to all fruit</button></a>
+                <!-- link to an individual page on a website!!! lesgo >:3 -->
               </div>
             </div>
           </div>

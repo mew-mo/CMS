@@ -47,3 +47,24 @@ Tags: cool, new
   height: 15vh;
   object-fit: cover;
 }
+
+.carousel-caption {
+  height: auto;
+  width: auto;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.caro-img {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.logo {
+  height: 80px;
+  margin-left: 50px;
+}
+
+.star-rating {
+  color: #c994df;
+}
