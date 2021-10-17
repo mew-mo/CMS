@@ -42,13 +42,35 @@ if ( have_posts() ) :
       <!-- 2nd arg is an array of attributes -->
       <div class="card-body">
         <h5 class="card-title">
-          <a href="<?php the_permalink();?>">
+        <a href="<?php the_permalink();?>">
           <?php the_title(); ?></h5>
-          </a>
-          <p class="text-secondary">Posted: <?php the_date('F j, Y');?> <?php the_time();?></p>
+        </a>
+        <p class="text-secondary">Posted: <?php echo get_the_date('F j, Y');?> <?php the_time();?></p>
           <!-- f = full name of month -->
           <!-- j = number of the month -->
           <!-- y = year -->
+
+        <?php
+        echo get_the_term_list($post->ID, 'attribute', '<div class="custom-class">', ' ', '</div>');
+        // for our custom taxonomy tags :00
+        // 1st arg the idea
+        // 2nd arg the taxonomy name data
+        // 3rd arg what its inside
+        ?>
+
+        <p class="text-danger"><?php
+        $contact_or_nah = get_post_meta(get_the_ID(), 'sportcontact_input', true);
+        if ($contact_or_nah) {
+          echo $contact_or_nah . ' sport';
+        }
+        ?></p>
+        <hr>
+        <p><?php
+        $splurb = get_post_meta(get_the_ID(), 'sportblurb_input', true);
+        if ($splurb) {
+          echo $splurb;
+        }
+        ?></p>
         <p class="card-text"><?php the_excerpt();?></p>
         <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
         <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>

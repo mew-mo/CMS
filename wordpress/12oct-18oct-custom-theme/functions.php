@@ -110,7 +110,7 @@ function create_photographs_posttype() {
 
 add_action('init', 'create_photographs_posttype');
 
-// set up a custom metabox!! :D
+// set up a custom metabox!! :D - 151021
 // ================================================
 function add_fruit_metabox() {
   add_meta_box(
@@ -131,6 +131,7 @@ function add_fruit_metabox() {
 // argument where wordpress grabs all the information about that post so you have access to all of the post data :D
 function fruit_metabox_callback($post) {
   $blurb_data = get_post_meta($post->ID, 'blurb_input', true);
+  // get post meta gets a specific piece of data from the post, so the data we are getting is the blurb input
   // 1. getting the post
   // 2. the data you want to obtain (lined to the input field)
   // 3. true is returning a single string. false would be like returning an array of values. so like! its true it does return a single bit of data!
@@ -138,6 +139,10 @@ function fruit_metabox_callback($post) {
   $review_data = get_post_meta($post->ID, 'review_input', true);
 
   $radio_rating_data = get_post_meta($post->ID, 'radio_rating', true);
+
+  $drop_data = get_post_meta($post->ID, 'drop', true);
+
+  // $check_data = get_post_meta($post->ID, 'drop', false);
 
   echo '<label for "blurb" class="blurb-label">Blurb</label>' .
   '<input type ="text" id="blurb_input" name="blurb_input" size="50" value="' . $blurb_data . '"><br><br>';
@@ -147,7 +152,9 @@ function fruit_metabox_callback($post) {
   // need to run a save and retrieve function to the database to make it useful :D
   ?>
   <div class="fields">
-    Star Rating:<br>
+    <label class="blurb-label">
+      Star Rating:
+    </label><br>
     <div class="fields">
       <label>
         <input type="radio" name="radio_rating" value="1" <?php
@@ -189,6 +196,48 @@ function fruit_metabox_callback($post) {
 
   <?php
   echo 'You rated ' . $radio_rating_data . ' out of 5';
+
+  // now the dropdown!
+  ?>
+  <br><br>
+  <label class="blurb-label">
+    This fruit is...
+  </label><br>
+  <select name="fruit_dropdown" id="fruit_dropdown">
+    <option name="drop" value="love" <?php
+      if ($drop_data == 'love') {
+        echo 'autofocus';
+      }
+    ?>>my favourite fruit</option>
+    <option name="drop" value="like" <?php
+      if ($drop_data == 'like') {
+        echo 'autofocus';
+      }
+    ?>>a fruit I like</option>
+    <option name="drop" value="dont-care" <?php
+      if ($drop_data == 'dont-care') {
+        echo 'autofocus';
+      }
+    ?>>a fruit I don't have strong opinions on</option>
+    <option name="drop" value="dislike" <?php
+      if ($drop_data == 'dislike') {
+        echo 'autofocus';
+      }
+    ?>>a fruit I dislike</option>
+    <option name="drop" value="hate" <?php
+      if ($drop_data == 'hate') {
+        echo 'autofocus';
+      }
+    ?>>a fruit I hate</option>
+  </select>
+
+  <?php
+  echo 'To you, this fruit is ' . $drop_data;
+  ?>
+
+  <!-- checkbox :') -->
+
+  <?php
 }
 
 // run the metabox function during the admin menu WP function. its the time where wp sets up the admin panel in the dashboard
@@ -222,6 +271,7 @@ function save_fruit_metabox_data($post_id, $post) {
 
   // check if it's been posted
   // IF is checking if it exists (if data has actually been entered into the input)
+  // checking if someone has posted value to blurb_input into the metabox
   if (isset($_POST['blurb_input'])) {
     update_post_meta($post_id, 'blurb_input', sanitize_text_field($_POST['blurb_input']));
     // 1st arg. grabbing the particular post we are saving to
@@ -256,4 +306,128 @@ add_action('save_post', 'save_fruit_metabox_data', 10, 2);
 // two number args at the end!
 // 1st arg = priority, used to specify order in which the action is executed. so saving posts HAS to occur at position 10, this is just due to how wordpress is structured.
 // 2nd arg = integer -- telling it to use two arguments at the end,,,,,, ??? don't know.
+
+// new metaboxes - for sport - 181021
+// ==========================================
+
+function add_sport_metabox() {
+  add_meta_box(
+    'sport_metabox',
+    'blurb & is it contact?',
+    'sport_metabox_callback',
+    'sports',
+    'normal'
+  );
+}
+
+function sport_metabox_callback($post) {
+  $sportblurb_data = get_post_meta($post->ID, 'sportblurb_input', true);
+
+  $sportcontact_data = get_post_meta($post->ID, 'sportcontact_input', true);
+
+  // blurb
+  echo '<label for "sportblurb_input" class="blurb-label">Blurb</label><br>' .
+  '<textarea id="sportblurb_input" name="sportblurb_input" rows="5" cols="57">' . $sportblurb_data . '</textarea><br><br>';
+
+  // radiobox
+  ?>
+  <div class="fields">
+    <label class="blurb-label">
+      Is it a contact sport?
+    </label><br>
+    <div class="fields">
+      <label>
+        <input type="radio" name="sportcontact_input" value="contact" <?php
+          if ($sportcontact_data == 'contact') {
+            echo 'checked';
+          }
+        ?>> Contact Sport
+      </label><br>
+      <label>
+        <input type="radio" name="sportcontact_input" value="non-contact" <?php
+          if ($sportcontact_data == 'non-contact') {
+            echo 'checked';
+          }
+        ?>> Non-contact Sport
+      </label><br>
+    </div>
+  <?php
+} //callback ends
+
+add_action('admin_menu', 'add_sport_metabox');
+
+function save_sport_metabox_data($post_id, $post) {
+  $post_type = get_post_type_object($post->post_type);
+  if (! current_user_can($post_type->cap->edit_post, $post_id)) {
+    return $post_id;
+  }
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+    return $post_id;
+  }
+
+  if ($post->post_type != 'sports') {
+    return $post_id;
+  }
+
+  if (isset($_POST['sportblurb_input'])) {
+    update_post_meta($post_id, 'sportblurb_input', sanitize_text_field($_POST['sportblurb_input']));
+  } else {
+    delete_post_meta($post_id, 'sportblurb_input');
+  }
+
+  if (isset($_POST['sportcontact_input'])) {
+    update_post_meta($post_id, 'sportcontact_input', sanitize_text_field($_POST['sportcontact_input']));
+  } else {
+    delete_post_meta($post_id, 'sportcontact_input');
+  }
+  return $post_id;
+} //end saving metabox data
+
+add_action('save_post', 'save_sport_metabox_data', 10, 2);
+
+
+// setting up custom taxonomies (for categories) for our custom post type sports
+// ==============================================
+function create_sport_taxonomy() {
+  $labels = array(
+    'name' => 'Custom Attributes',
+    // shows in the front end, whatis seen as the category set of names
+    'singular_name' => 'Attribute',
+    'search_items' => 'Search Attributes',
+    // so user can search
+    'all_items' => 'All Attributes',
+    'parent_item' => 'Parent Attribute',
+    'parent_item_colon' => 'Parent Attribute:',
+    // for how it displays on the dash
+    'edit_item' => 'Edit Attribute',
+    'update_item' => 'Update Attribute',
+    'add_new_item' => 'Add new Attribute',
+    'new_item_name' => 'New Attribute Name',
+    'menu_name' => 'Attribute'
+  );
+
+  // within the function, register the taxonomy
+  register_taxonomy(
+    'attribute',
+    array('sports'),
+    array(
+      'hierarchical' => true,
+      // taxonomy type- relates to the use of parents, whether you use them or not.
+      'labels' => $labels,
+      // pluggin in our labelsz
+      'show_ui' => true
+      // show it in the dashboard
+    )
+  );
+  // wp funciton that takes our labels
+  // 1st arg = taxonomy name
+  // 2nd arg = custom post type u want to associate it to, taken as an array
+  // 3rd arg = array of the labels and other taxonomy stuff, including taxonomy type
+}
+
+// action hoook to set up the custom taxonomy woowoo
+add_action('init', 'create_sport_taxonomy', 0);
+// taxonomies load up during the init
+// priority number at the end. taxonomies need a priority of 0 (loaded up first) as they will not work if you load them too late
+
 ?>

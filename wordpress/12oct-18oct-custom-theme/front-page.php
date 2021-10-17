@@ -1,6 +1,7 @@
 <!-- this is front-page.php >:D -->
 <!-- it is essential practise to call it this -->
 <!-- index is a last resort page that will be defaulted to sometimes -->
+<!-- https://github.com/2102-YB-WN-WUX/first-custom-wordpress-theme -->
 
   <?php get_header(); ?>
   <!-- wordpress NEEDS to have a header and a footer or else it will be so upset with you -->
@@ -27,10 +28,23 @@
                   <!-- <p class="text-secondary">Posted: <?php //the_date('F j, Y');?> <?php //the_time();?></p> -->
                   <!-- the_date() will only show a particular date oNCE, so say if you post multiple times on oct 12, it will only print the date of october 12 on One item -->
                   <p class="text-secondary">Posted: <?php echo get_the_date('F j, Y');?> <?php the_time();?></p>
-
                   <!-- f = full name of month -->
                   <!-- j = number of the month -->
                   <!-- y = year -->
+
+                  <!-- div for tags! -->
+                  <div class="plswork">
+                    <?php
+                    $categories = get_the_category();
+                    foreach ($categories as $category) {
+                      echo '<a href="' . get_category_link($category->term_id) . '">' . $category->cat_name . '</a>';
+                      // argument to grab the link from that catergory object.
+                      // find the property names like cat_name in the wordpress database.,,
+                    }
+                     ?>
+                  </div>
+                  <!-- div for tags! -->
+
                 <p class="card-text"><?php the_excerpt();?></p>
                 <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
                 <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
