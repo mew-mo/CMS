@@ -1,38 +1,22 @@
-<!-- template for the fruit us page ^-^ wooo -->
-
-<?php
-
-/*
-
-Template Name: momo fruit fruit template!
-
-*/
-
-?>
-
-<?php
-
-query_posts(
-  array(
-    'post_type' => 'fruit'
-  )
-);
-// checks what the posts are. make sure they MATCH
-?>
 
 <?php
 
 get_header(); ?>
 
 <div class="container mt-5">
-  <h1><?php the_title(); ?></h1>
-  <?php the_content(); ?>
+  <h1>Fruit Colour Tags</h1>
+  <h3>
+    Category:
+    <?php
+    $term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
+    echo $term->name;
+    ?>
+  </h3>
 
   <div class="row">
 
-
 <?php
-if ( have_posts() ) : $postcount =0;
+if ( have_posts() ) : $postcount = 0;
 // the : defines whats going to happen AFTER
 
   while (have_posts() ) : the_post();
@@ -57,6 +41,11 @@ if ( have_posts() ) : $postcount =0;
           <!-- f = full name of month -->
           <!-- j = number of the month -->
           <!-- y = year -->
+
+          <?php
+          echo get_the_term_list($post->ID, 'fruit-colour', '<div class="fruit-colour-tag">', ', ', '</div>');
+          ?>
+
         <p class="card-text"><?php the_excerpt();?></p>
         <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
         <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
@@ -83,6 +72,11 @@ if ( have_posts() ) : $postcount =0;
             <!-- f = full name of month -->
             <!-- j = number of the month -->
             <!-- y = year -->
+
+          <?php
+          echo get_the_term_list($post->ID, 'fruit-colour', '<div class="fruit-colour-tag">', ', ', '</div>');
+          ?>
+
           <p class="card-text"><?php the_excerpt();?></p>
           <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
           <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>

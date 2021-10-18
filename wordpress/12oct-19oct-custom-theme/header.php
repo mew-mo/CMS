@@ -14,7 +14,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- <a class="navbar-brand" href="<?php //echo home_url(); ?>"><?php //bloginfo('name'); ?></a> -->
 
-		<a class="navbar-brand" href="<?php echo home_url(); ?>"><img src="<?php bloginfo('stylesheet_directory');?>/images/cat.png" alt="nyah catcat" class="logo"></a>
+		<a class="navbar-brand" href="<?php echo home_url(); ?>"><img src="<?php bloginfo('stylesheet_directory');?>/images/cat.png" alt="nyah catcat" id="logo"></a>
 		<!-- stylesheet directory is how we access the files to the website, it's like a relative link to it -->
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

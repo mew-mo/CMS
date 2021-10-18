@@ -35,7 +35,7 @@ if ( have_posts() ) :
 
   while (have_posts() ) : the_post(); ?>
   <!-- this is where it loops over each post -->
-  <div class="col-4">
+  <div class="col-4 mt-5">
     <div class="card" style="width: 18rem;">
       <?php the_post_thumbnail('medium_large', ['class' => 'card-img-top']); ?>
       <!-- 1st arg is img size -->

@@ -60,7 +60,7 @@ Tags: cool, new
   object-fit: cover;
 }
 
-.logo {
+#logo {
   height: 80px;
   margin-left: 50px;
 }

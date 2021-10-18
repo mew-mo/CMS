@@ -22,6 +22,12 @@
                   echo $fruit_blurb;
                  ?></p>
                 <p class="card-text"><?php the_content();?></p>
+                <p><span class="pastel-purp">@<?php the_author();?></span> says: <span class="author-tag text-secondary">"This is
+                <?php
+                $my_opinion = get_post_meta(get_the_ID(), 'fruit_dropdown', true);
+                echo $my_opinion;
+                ?>!"</span></p>
+
                 <a href="<?php echo get_page_link(get_page_by_path('actual-fruit-not-clickbait'));?>" style="color:white;">
                   <!-- get the page slug ^o^ to get page by path -->
                   <button type="button" class="btn btn-primary bg-pastel">Back to all fruit</button></a>

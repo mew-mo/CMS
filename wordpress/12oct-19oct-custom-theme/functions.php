@@ -8,6 +8,9 @@
 // turning on the thumbnails--
 // turn on theme support
 add_theme_support('post-thumbnails');
+// adding support for woocommerce too!
+add_theme_support('woocommerce');
+
 
 function import_stylesheet() {
   wp_enqueue_style('custom-style', get_stylesheet_uri());
@@ -140,7 +143,7 @@ function fruit_metabox_callback($post) {
 
   $radio_rating_data = get_post_meta($post->ID, 'radio_rating', true);
 
-  $drop_data = get_post_meta($post->ID, 'drop', true);
+  $drop_data = get_post_meta($post->ID, 'fruit_dropdown', true);
 
   // $check_data = get_post_meta($post->ID, 'drop', false);
 
@@ -204,29 +207,29 @@ function fruit_metabox_callback($post) {
     This fruit is...
   </label><br>
   <select name="fruit_dropdown" id="fruit_dropdown">
-    <option name="drop" value="love" <?php
-      if ($drop_data == 'love') {
-        echo 'autofocus';
+    <option name="drop" value="my favourite fruit" <?php
+      if ($drop_data == 'my favourite fruit') {
+        echo 'selected';
       }
     ?>>my favourite fruit</option>
-    <option name="drop" value="like" <?php
-      if ($drop_data == 'like') {
-        echo 'autofocus';
+    <option name="drop" value="a fruit I like" <?php
+      if ($drop_data == 'a fruit I like') {
+        echo 'selected';
       }
     ?>>a fruit I like</option>
-    <option name="drop" value="dont-care" <?php
-      if ($drop_data == 'dont-care') {
-        echo 'autofocus';
+    <option name="drop" value="a fruit I don't have strong opinions on" <?php
+      if ($drop_data == "a fruit I don't have strong opinions on") {
+        echo 'selected';
       }
     ?>>a fruit I don't have strong opinions on</option>
-    <option name="drop" value="dislike" <?php
-      if ($drop_data == 'dislike') {
-        echo 'autofocus';
+    <option name="drop" value="a fruit I dislike" <?php
+      if ($drop_data == 'a fruit I dislike') {
+        echo 'selected';
       }
     ?>>a fruit I dislike</option>
-    <option name="drop" value="hate" <?php
-      if ($drop_data == 'hate') {
-        echo 'autofocus';
+    <option name="drop" value="a fruit I hate" <?php
+      if ($drop_data == 'a fruit I hate') {
+        echo 'selected';
       }
     ?>>a fruit I hate</option>
   </select>
@@ -294,6 +297,12 @@ function save_fruit_metabox_data($post_id, $post) {
     update_post_meta($post_id, 'radio_rating', sanitize_text_field($_POST['radio_rating']));
   } else {
     delete_post_meta($post_id, 'radio_rating');
+  }
+
+  if (isset($_POST['fruit_dropdown'])) {
+    update_post_meta($post_id, 'fruit_dropdown', sanitize_text_field($_POST['fruit_dropdown']));
+  } else {
+    delete_post_meta($post_id, 'fruit_dropdown');
   }
 
   return $post_id;
@@ -409,6 +418,7 @@ function create_sport_taxonomy() {
   // within the function, register the taxonomy
   register_taxonomy(
     'attribute',
+    // taxonomy key! the dataname for it! or whatevs!
     array('sports'),
     array(
       'hierarchical' => true,
@@ -429,5 +439,35 @@ function create_sport_taxonomy() {
 add_action('init', 'create_sport_taxonomy', 0);
 // taxonomies load up during the init
 // priority number at the end. taxonomies need a priority of 0 (loaded up first) as they will not work if you load them too late
+
+// creating a new taxonomy for fruit colours - 191021
+// ======================================================
+function create_colour_taxonomy() {
+  $labels = array(
+    'name' => 'Fruit Colours',
+    'singular_name' => 'Colour',
+    'search_items' => 'Search Fruit Colours',
+    'all_items' => 'All Fruit Colours',
+    'parent_item' => 'Parent Fruit Colours',
+    'parent_item_colon' => 'Parent Fruit Colour:',
+    'edit_item' => 'Edit Fruit Colour',
+    'update_item' => 'Update Fruit Colour',
+    'add_new_item' => 'Add new Fruit Colour',
+    'new_item_name' => 'New Fruit Colour Name',
+    'menu_name' => 'Fruit Colour'
+  );
+
+  register_taxonomy(
+    'fruit-colour',
+    array('fruit'),
+    array(
+      'hierarchical' => true,
+      'labels' => $labels,
+      'show_ui' => true
+    )
+  );
+}
+
+add_action('init', 'create_colour_taxonomy', 0);
 
 ?>
