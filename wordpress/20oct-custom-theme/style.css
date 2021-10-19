@@ -1,0 +1,80 @@
+/*
+
+Theme Name: MO REAL Custom Theme
+
+Theme URI: http://website.com/theme
+
+Author: Mo
+
+Author URI: http://website.com/theme
+
+Description: My first custom theme :D
+
+Version: 0.0.1
+
+License: GNU General Public License v2 or later
+
+Tags: cool, new
+
+*/
+
+/* wordpress reads the styles in the root directory */
+/* style.css has to be the first file you make, as it is what makes wordpress read your theme */
+/* preview image HAS TO BE A PNG and HAS TO BE CALLED screenshot.png. that's what wordpress looks for. */
+
+.pastel-purp {
+  color: #c994df;
+}
+
+.bg-dark {
+  background-color: #392f3d !important;
+}
+
+.bg-pastel {
+  background-color: #c994df !important;
+}
+
+.contact-body h3 {
+  display: inline;
+}
+
+.author-tag {
+  font-style: italic;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vh;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  height: auto;
+  width: auto;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.caro-img {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+}
+
+#logo {
+  height: 80px;
+  margin-left: 50px;
+}
+
+.star-rating {
+  color: #c994df;
+}
+
+/* remove OPTIONAL text */
+.woocommerce form .form-row .optional{
+    display: none ;
+}
+
+.woocommerce .cart-collaterals .cart_totals, .woocommerce-page .cart-collaterals .cart_totals {
+    float: right;
+    width: 60%;
+}
