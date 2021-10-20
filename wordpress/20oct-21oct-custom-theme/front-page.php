@@ -261,6 +261,9 @@
       </div>
       <!-- end photoslider row -->
 
+      <?php echo do_shortcode('[helloworldshortcode]'); ?>
+      <?php echo do_shortcode('[contact-form-7 id="23" title="Contact form 1"]'); ?>
+
     </div>
     <!-- end container -->
   <?php get_footer(); ?>
