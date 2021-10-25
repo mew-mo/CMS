@@ -521,4 +521,131 @@ function custom_field($checkout) {
   echo '</div>';
 }
 
+// creating a custom section and adding to the theme customizer - 261021
+// ======================================================
+
+// https://codex.wordpress.org/Theme_Customization_API
+// each one of the rows under wp customize is a section
+// what renders the settings is called a control. the sections contain settings, and the controls render them out.
+
+function my_first_customise_option($wp_customize) {
+  // arg- you NEED to load the customize object in. it contains all of the customize data on your website.
+  // now you can access different methods on that function
+  $wp_customize->add_section('mos_section', array(
+    'title' => 'my first section', 'custom_setting',
+    // what will show for the front end user
+    // the end part is the ID
+    'priority' => 0
+    // when it runs runs runs or shows shows shows
+    // use multiples of 50 for the number! yepyep
+  ));
+  // 1st arg - section name
+  // 2nd arg - like labels / config but this one is basic so we'll just have a lil array of two things.
+
+  // every section needs a SETTING and CONTROL
+  // now we're making the SETTING. add a new setting
+  $wp_customize->add_setting('my_custom_message', array(
+    'default' => ''
+    // default is just defining the default value. it could be anything. lol its like the placeholder text sparklesparkle
+  ));
+  // this takes similar arguments
+
+  // add the control that renders the setting
+  $wp_customize->add_control('my_custom_message', array(
+    'label' => 'Enter a custom message',
+    // what it will show above the input
+    'section' => 'mos_section',
+    // the section the control is linked to.
+    'settings' => 'my_custom_message',
+    // what setting it is going to render from.
+    'type' => 'textarea'
+    // what type of field we want so that wp will render it out for us :D
+  ));
+  // same args again
+
+  // new setting and control- make the page header EDITABLE and not static anymore.
+  // ===============================
+  $wp_customize->add_setting('edit_title', array(
+    'default' => 'Enter a new title!'
+  ));
+
+  $wp_customize->add_control('edit_title', array(
+    'label' => 'Enter the title',
+    'section' => 'mos_section',
+    'settings' => 'edit_title',
+    'type' => 'text'
+  ));
+
+  // number number, could be the setting you use for the excerpt
+  $wp_customize->add_setting('my_custom_number', array(
+    'default' => 0
+  ));
+
+  // control for tha number.
+  $wp_customize->add_control('my_custom_number', array(
+    'label' => 'Enter the number',
+    'section' => 'mos_section',
+    'settings' => 'my_custom_number',
+    'type' => 'number',
+    'input_attrs' => array(
+      'min' => 0,
+      'max' => 10
+      // setting the min and max number u can put in
+    )
+    // input attributes
+  ));
+
+} //end funct
+
+add_action('customize_register', 'my_first_customise_option');
+// action hook 2 register the section lesgo
+
+// new section
+// ===================
+
+function edit_bootstrap($wp_customize) {
+  $wp_customize->add_section('bootstrap_section', array(
+    'title' => 'Adjusting col sizes!', 'custom_setting',
+    'priority' => 0
+  ));
+
+  $wp_customize->add_setting('bs_number', array(
+    'default' => 4
+  ));
+
+  $wp_customize->add_control('bs_number', array(
+    'label' => 'Enter the number',
+    'section' => 'bootstrap_section',
+    'settings' => 'bs_number',
+    'type' => 'number',
+    'input_attrs' => array(
+      'min' => 1,
+      'max' => 12
+    )
+  ));
+
+  $wp_customize->add_setting('excerpt_length_new', array(
+    'default' => 20
+  ));
+
+  $wp_customize->add_control('excerpt_length_new', array(
+    'label' => 'Enter the new excerpt length',
+    'section' => 'bootstrap_section',
+    'settings' => 'excerpt_length_new',
+    'type' => 'number',
+    'input_attrs' => array(
+      'min' => 5,
+      'max' => 55
+    )
+  ));
+}
+
+add_action('customize_register', 'edit_bootstrap');
+
+function control_update_excerpt() {
+  return get_theme_mod('excerpt_length_new');
+}
+// updating the excerpt length whenever you do
+add_filter('excerpt_length', 'control_update_excerpt');
+
 ?>

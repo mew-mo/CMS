@@ -8,7 +8,8 @@
   <!-- finds our header.php and runs it across all pages (cool) -->
   <!-- wordpress will always use a default file to render the template unless you have a custom files specifically. your custom stuff will always override their defaults -->
     <div class="container mt-5">
-      <h1>ALL POSTS</h1>
+      <h1> <?php echo get_theme_mod('edit_title'); ?></h1>
+      <!-- from the custom settings 261021 -->
       <div class="row">
 
         <?php
@@ -17,7 +18,8 @@
 
           while (have_posts() ) : the_post(); ?>
           <!-- this is where it loops over each post -->
-          <div class="col-4">
+          <div class="col-<?php echo get_theme_mod('bs_number');?> mt-5">
+            <!-- custom section number to change the col size wowow -->
             <div class="card" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">
@@ -46,6 +48,7 @@
 
                 <p class="card-text"><?php the_excerpt();?></p>
                 <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
+                <!-- 261021 getting the user set excerpt length wawawa -->
                 <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
                 <a href="<?php the_permalink();?>" style="color:white;"><button type="button" class="btn btn-primary bg-pastel">Read more</button></a>
               </div>
@@ -263,6 +266,11 @@
 
       <?php echo do_shortcode('[helloworldshortcode]'); ?>
       <?php echo do_shortcode('[contact-form-7 id="23" title="Contact form 1"]'); ?>
+
+      <!-- 261021 adding in our custom section -->
+      <?php echo get_theme_mod('my_custom_message'); ?>
+      <!-- get the theme modification- wp interprets your changes in customize as modifications to the theme -->
+      <!-- the argument is the name of the control! -->
 
     </div>
     <!-- end container -->
