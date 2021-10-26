@@ -1,0 +1,281 @@
+<!-- this is front-page.php >:D -->
+<!-- it is essential practise to call it this -->
+<!-- index is a last resort page that will be defaulted to sometimes -->
+<!-- https://github.com/2102-YB-WN-WUX/first-custom-wordpress-theme -->
+
+  <?php get_header(); ?>
+  <!-- wordpress NEEDS to have a header and a footer or else it will be so upset with you -->
+  <!-- finds our header.php and runs it across all pages (cool) -->
+  <!-- wordpress will always use a default file to render the template unless you have a custom files specifically. your custom stuff will always override their defaults -->
+    <div class="container mt-5">
+      <h1> <?php echo get_theme_mod('edit_title'); ?></h1>
+      <!-- from the custom settings 261021 -->
+      <div class="row">
+
+        <?php
+
+        if ( have_posts() ) :
+
+          while (have_posts() ) : the_post(); ?>
+          <!-- this is where it loops over each post -->
+          <div class="col-<?php echo get_theme_mod('bs_number');?> mt-5">
+            <!-- custom section number to change the col size wowow -->
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="<?php the_permalink();?>">
+                  <?php the_title(); ?></h5>
+                  </a>
+                  <!-- <p class="text-secondary">Posted: <?php //the_date('F j, Y');?> <?php //the_time();?></p> -->
+                  <!-- the_date() will only show a particular date oNCE, so say if you post multiple times on oct 12, it will only print the date of october 12 on One item -->
+                  <p class="text-secondary">Posted: <?php echo get_the_date('F j, Y');?> <?php the_time();?></p>
+                  <!-- f = full name of month -->
+                  <!-- j = number of the month -->
+                  <!-- y = year -->
+
+                  <!-- div for tags! -->
+                  <div class="plswork">
+                    <?php
+                    $categories = get_the_category();
+                    foreach ($categories as $category) {
+                      echo '<a href="' . get_category_link($category->term_id) . '">' . $category->cat_name . '</a>';
+                      // argument to grab the link from that catergory object.
+                      // find the property names like cat_name in the wordpress database.,,
+                    }
+                     ?>
+                  </div>
+                  <!-- div for tags! -->
+
+                <p class="card-text"><?php the_excerpt();?></p>
+                <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
+                <!-- 261021 getting the user set excerpt length wawawa -->
+                <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
+                <a href="<?php the_permalink();?>" style="color:white;"><button type="button" class="btn btn-primary bg-pastel">Read more</button></a>
+              </div>
+            </div>
+          </div>
+          <?php endwhile;
+            else : echo '<p> There are no posts,, </p>';
+          endif
+          ?>
+      </div>
+      <!-- end row -->
+
+      <?php
+
+      query_posts(
+        array(
+          'post_type' => 'fruit'
+        )
+      );
+      // checks what the posts are. make sure they MATCH
+      ?>
+      <div class="row">
+
+        <div class="p-5 mb-4 bg-light rounded-3 mt-5">
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">There are also fruit</h1>
+            <p class="col-md-8 fs-4"></p>
+          </div>
+        </div>
+
+      <?php
+      if ( have_posts() ) :
+
+        while (have_posts() ) : the_post(); ?>
+        <!-- this is where it loops over each post -->
+        <div class="col-4">
+          <div class="card" style="width: 18rem;">
+            <?php the_post_thumbnail('medium_large', ['class' => 'card-img-top']); ?>
+            <!-- 1st arg is img size -->
+            <!-- 2nd arg is an array of attributes -->
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="<?php the_permalink();?>">
+                <?php the_title(); ?></h5>
+                </a>
+                <!-- <p class="text-secondary">Posted: <?php //the_date('F j, Y');?> <?php //the_time();?></p> -->
+                <p class="text-secondary">Posted: <?php echo get_the_date('F j, Y');?> <?php the_time();?></p>
+                <!-- f = full name of month -->
+                <!-- j = number of the month -->
+                <!-- y = year -->
+              <p class="card-text"><?php the_excerpt();?></p>
+              <!-- the_excerpt is a shortened version of the_content that cuts it off so it displays briefly :D  -->
+              <p class="card-text text-secondary author-tag">By <span class="pastel-purp">@<?php the_author();?></span></p>
+
+              <p><?php
+                $review = get_post_meta(get_the_ID(), 'review_input', true);
+                if ($review) {
+                  ?><b>REVIEW:</b> <?php
+                  echo $review;
+                }
+              ?></p>
+
+              <!-- trying todo the LOOP??? -->
+              <p class="star-rating">
+                <?php
+                  $stars = get_post_meta(get_the_ID(), 'radio_rating', true);
+                  // stars is the number that you rated it
+                  $star_num = 5;
+                  // star num is the total number of stars we want to show regardless of your rating :)
+                  for ($i=0; $i < $star_num ; $i++) {
+                    if ($i < $stars) {
+                      ?>
+                      <span class="material-icons">
+                      star
+                      </span>
+                      <?php
+                    } else {
+                      ?>
+                      <span class="material-icons">
+                      star_outline
+                      </span>
+                      <?php
+                    }
+                  }
+                ?>
+              </p>
+              <!-- bro i feel so smart right now even though this is so basic LOOOOL -->
+
+              <a href="<?php the_permalink();?>" style="color:white;"><button type="button" class="btn btn-primary bg-pastel">Read more</button></a>
+            </div>
+          </div>
+        </div>
+        <?php endwhile;
+          else : echo '<p> There are no posts,, </p>';
+        endif
+        ?>
+      </div>
+      <!-- end row again -->
+
+      <?php
+
+      query_posts(
+        array(
+          'post_type' => 'sports'
+        )
+      );
+      // checks what the posts are. make sure they MATCH
+      ?>
+
+      <div class="row">
+        <div class="p-5 mb-4 bg-light rounded-3 mt-5">
+          <div class="container-fluid py-5">
+            <div class="row">
+              <div class="col-6">
+                <h1 class="display-5 fw-bold">There are also SPORTS. seriously.</h1>
+              </div>
+              <div class="col-6">
+                <?php
+                if ( have_posts() ) :
+                  while (have_posts() ) : the_post(); ?>
+                    <ul>
+                      <li>
+                        <a href="<?php the_permalink();?>">
+                        <?php the_title(); ?></h5>
+                        </a>
+                      </li>
+                    </ul>
+                  <?php endwhile;
+                    else : echo '<p> There are no posts,, </p>';
+                  endif
+                  ?>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- end cont -->
+        </div>
+        <!-- end jumbo -->
+      </div>
+      <!-- end row -->
+
+      <?php
+
+      query_posts(
+        array(
+          'post_type' => 'photographs'
+        )
+      );
+      ?>
+
+      <div class="row photoslider">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+        <?php
+        if ( have_posts() ) : $post_item = 0;
+          while (have_posts() ) : the_post();
+            $post_item++;
+
+            if ($post_item == 1) {
+          ?>
+            <!-- first item so has to have the active class -->
+            <div class="carousel-item active">
+              <?php the_post_thumbnail('large',
+              ['class' => 'd-block',
+              'class' => 'w-100',
+              'class' => 'caro-img']); ?>
+              <div class="carousel-caption d-none d-md-block" >
+                <h5><?php the_title();?></h5>
+                <p><?php the_content();?></p>
+              </div>
+              <!-- end caption -->
+            </div>
+            <!-- END ITEM -->
+            <?php
+          }  else { ?>
+            <!-- THESE ONES do NOT have the active class -->
+            <div class="carousel-item">
+              <?php the_post_thumbnail('large',
+              ['class' => 'd-block',
+              'class' => 'w-100',
+              'class' => 'caro-img']); ?>
+              <div class="carousel-caption d-none d-md-block">
+                <h5><?php the_title();?></h5>
+                <p><?php the_content();?></p>
+              </div>
+              <!-- end caption -->
+            </div>
+            <!-- END ITEM -->
+            <?php
+            } //else ends here
+            endwhile;
+              else: echo '<p> NO POSTS??? </p>';
+            endif
+            ?>
+          </div>
+          <!-- end inner carousel -->
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <!-- end photoslider row -->
+
+      <?php echo do_shortcode('[helloworldshortcode]'); ?>
+      <?php echo do_shortcode('[contact-form-7 id="23" title="Contact form 1"]'); ?>
+
+      <!-- 261021 adding in our custom section -->
+      <?php echo get_theme_mod('my_custom_message'); ?>
+      <!-- get the theme modification- wp interprets your changes in customize as modifications to the theme -->
+      <!-- the argument is the name of the control! -->
+
+      <!-- 271021 slapping in the uploaded image -->
+      <img src="<?php echo get_theme_mod('custom_img'); ?>" alt="wow custom img">
+
+    </div>
+    <!-- end container -->
+  <?php get_footer(); ?>
+</html>
