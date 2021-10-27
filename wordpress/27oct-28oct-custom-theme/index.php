@@ -24,4 +24,15 @@
     </div>
     <!-- end container -->
   <?php get_footer(); ?>
+
+  <!-- here, read more about having good seo -->
+  <!-- https://www.hostgator.com/blog/write-title-tags-seo/ -->
+  <!-- https://yoast.com/meta-descriptions/ -->
+
+  <!-- essential plugins -->
+  <!-- loftloader -->
+  <!-- smush -->
+  <!-- all in one WP security & firewall -->
+  <!-- w3 total cache -->
+  <!-- yoast -->
 </html>

@@ -10,8 +10,8 @@
     <div class="container mt-5">
       <h1> <?php echo get_theme_mod('edit_title'); ?></h1>
       <!-- from the custom settings 261021 -->
-      <div class="row">
-
+      <div class="row" id="<?php echo get_theme_mod('dropdown_again')?>">
+        <!-- id will hide or show posts based on user selection. 281021 -->
         <?php
 
         if ( have_posts() ) :

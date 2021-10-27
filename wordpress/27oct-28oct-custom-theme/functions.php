@@ -659,7 +659,42 @@ function my_first_customise_option($wp_customize) {
       // priority just to add an order / change the order lol (in 50s !!)
     )));
 
-} //end funct
+    // adding anotha dropdown =w= 281021
+    // ==============
+    $wp_customize->add_setting('dropdown_again', array(
+      'default' => ''
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'dropdown_again', array(
+      'label' => 'Show latest posts on the front page',
+      'description' => 'you will select a thing',
+      'settings' => 'dropdown_again',
+      'priority' => 10,
+      'section' => 'mos_section',
+      'type' => 'select',
+      'choices' => array(
+        'show_posts' => 'Yes',
+        'hide_posts' => 'No'
+      )
+    )));
+
+    // one more dropdown for hiding and showing woocommerce related products
+    $wp_customize->add_setting('woo_drop', array(
+      'default' => ''
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'woo_drop', array(
+      'label' => 'Enable related products on Product page',
+      'settings' => 'woo_drop',
+      'priority' => 10,
+      'section' => 'mos_section',
+      'type' => 'select',
+      'choices' => array(
+        'yes' => 'Enable',
+        'no' => 'Disable'
+      )
+    )));
+  } //end funct
 
 add_action('customize_register', 'my_first_customise_option');
 // action hook 2 register the section lesgo

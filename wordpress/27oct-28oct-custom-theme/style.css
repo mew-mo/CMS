@@ -78,3 +78,11 @@ Tags: cool, new
     float: right;
     width: 60%;
 }
+
+#show_posts {
+  display: flex;
+}
+
+#hide_posts {
+  display: none;
+}
